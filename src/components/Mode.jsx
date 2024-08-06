@@ -17,10 +17,11 @@ const Mode = ({ theme, setTheme }) => {
       <IconButton
         onClick={handleToggleTheme}
         sx={{
-          display: isDarkMode ? "none" : "block",
+          display: isDarkMode ? "block" : "none",
           transition: "opacity 0.3s ease",
-          opacity: isDarkMode ? 0 : 1,
+          opacity: isDarkMode ? 1 : 0,
           color: "#F1E3D3",
+          fontSize: 30,
         }}
       >
         <FontAwesomeIcon icon={faSun} />
@@ -28,10 +29,11 @@ const Mode = ({ theme, setTheme }) => {
       <IconButton
         onClick={handleToggleTheme}
         sx={{
-          display: isDarkMode ? "block" : "none",
+          display: isDarkMode ? "none" : "block",
           transition: "opacity 0.3s ease",
-          opacity: isDarkMode ? 1 : 0,
+          opacity: isDarkMode ? 0 : 1,
           color: "#F1E3D3",
+          fontSize: 30,
         }}
       >
         <FontAwesomeIcon icon={faMoon} />
