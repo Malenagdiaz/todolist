@@ -1,31 +1,28 @@
+import React from "react";
 import { Box, Typography, Icon } from "@mui/material";
 import Background from "../assets/header.png";
 import TaskIcon from "../assets/task-icon.png";
+import Mode from "../components/Mode";
 
-const Header = () => {
+const Header = ({ theme, setTheme }) => {
   return (
     <Box
       sx={{
-        width: { xs: "90%", md: "70%" },
-        height: { xs: 80, md: 100 },
-        borderRadius: "0 0 20px 20px",
-        overflow: "hidden",
-        margin: "0 auto",
+        width: "100%",
+        padding: "30px 20px",
         backgroundImage: `url(${Background})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
-        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
-        padding: "20px",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
       }}
     >
       <Typography
         variant="h1"
         sx={{
-          fontSize: { xs: 20, md: 50 },
+          fontSize: { xs: 20, md: 45 },
           color: "#F1E3D3",
+          fontFamily: "Margarine",
           display: "flex",
           alignItems: "center",
         }}
@@ -38,6 +35,7 @@ const Header = () => {
           sx={{ width: 53, height: 53, marginLeft: 1 }}
         />
       </Typography>
+      <Mode theme={theme} setTheme={setTheme} />
     </Box>
   );
 };
