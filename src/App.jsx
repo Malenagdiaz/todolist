@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ThemeProvider, Box } from "@mui/material";
 import { lightTheme, darkTheme } from "../src/theme/theme";
 import Header from "./components/Header";
+import NewTask from "./components/NewTask";
+import Tasklist from "./components/Tasklist";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -19,6 +21,8 @@ function App() {
         }}
       >
         <Header theme={theme} setTheme={setTheme} />
+        <NewTask />
+        <Tasklist />
       </Box>
     </ThemeProvider>
   );
