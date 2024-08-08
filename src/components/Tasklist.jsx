@@ -2,13 +2,22 @@ import { Box, Typography, Checkbox } from "@mui/material";
 import Edit from "./Edit";
 import Delete from "./Delete";
 
-const TaskList = ({ tasks, filter, toggleComplete }) => {
+const TaskList = ({ tasks, filter, toggleComplete, setTasks }) => {
   const filteredTasks = tasks.filter((task) => {
     if (filter === "Todas") return true;
     if (filter === "Completas") return task.completed;
     if (filter === "Incompletas") return !task.completed;
     return false;
   });
+
+  const handleDelete = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+  };
+
+  const handleEdit = (updatedTasks) => {
+    setTasks(updatedTasks);
+  };
 
   return (
     <Box
@@ -89,8 +98,8 @@ const TaskList = ({ tasks, filter, toggleComplete }) => {
                 >
                   {task.text}
                 </Typography>
-                <Edit />
-                <Delete />
+                <Edit taskId={task.id} onEdit={handleEdit} />
+                <Delete taskId={task.id} onDelete={handleDelete} />
               </Box>
             ))
           )}

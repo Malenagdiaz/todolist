@@ -9,16 +9,33 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { loadTasks, saveTasks } from "../utils/localStorage";
 
-const Edit = () => {
+const Edit = ({ taskId, onEdit }) => {
   const [open, setOpen] = useState(false);
+  const [newText, setNewText] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
+    const tasks = loadTasks();
+    const task = tasks.find((task) => task.id === taskId);
+    if (task) {
+      setNewText(task.text);
+    }
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleEdit = () => {
+    const tasks = loadTasks();
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, text: newText } : task
+    );
+    saveTasks(updatedTasks);
+    onEdit(updatedTasks);
+    handleClose();
   };
 
   return (
@@ -62,6 +79,8 @@ const Edit = () => {
             fullWidth
             margin="normal"
             variant="outlined"
+            value={newText}
+            onChange={(e) => setNewText(e.target.value)}
             sx={{ mb: 2 }}
           />
           <ButtonGroup sx={{ width: "100%" }} fullWidth>
@@ -83,6 +102,7 @@ const Edit = () => {
                 color: "#FFFFFF",
                 "&:hover": { bgcolor: "#D88C9A" },
               }}
+              onClick={handleEdit}
             >
               Editar
             </Button>

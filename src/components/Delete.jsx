@@ -2,12 +2,21 @@ import { useState } from "react";
 import { Box, IconButton, Modal, Typography, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { loadTasks, saveTasks } from "../utils/localStorage";
 
-const Delete = () => {
+const Delete = ({ taskId, onDelete }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleDelete = () => {
+    let tasks = loadTasks();
+    tasks = tasks.filter((task) => task.id !== taskId);
+    saveTasks(tasks);
+    onDelete(taskId);
+    handleClose();
+  };
 
   return (
     <Box>
@@ -74,6 +83,7 @@ const Delete = () => {
                   color: "#8E7DBE",
                 },
               }}
+              onClick={handleDelete}
             >
               Aceptar
             </Button>
