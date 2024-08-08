@@ -4,7 +4,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const Filter = () => {
+const Filter = ({ filter, handleFilter }) => {
+  const handleChange = (event) => {
+    handleFilter(event.target.value);
+  };
+
   return (
     <Box sx={{ minWidth: { xs: 100, md: 120 } }}>
       <FormControl fullWidth>
@@ -27,6 +31,8 @@ const Filter = () => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Tareas"
+          value={filter}
+          onChange={handleChange}
           sx={{
             backgroundColor: "#fcfcda",
             "& .MuiOutlinedInput-notchedOutline": {

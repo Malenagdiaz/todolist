@@ -2,7 +2,14 @@ import { Box, Typography, Checkbox } from "@mui/material";
 import Edit from "./Edit";
 import Delete from "./Delete";
 
-const Tasklist = () => {
+const TaskList = ({ tasks, filter, toggleComplete }) => {
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "Todas") return true;
+    if (filter === "Completas") return task.completed;
+    if (filter === "Incompletas") return !task.completed;
+    return false;
+  });
+
   return (
     <Box
       sx={{
@@ -32,43 +39,65 @@ const Tasklist = () => {
             overflowY: "auto",
           }}
         >
-          <Box
-            sx={{
-              width: "100%",
-              backgroundColor: "#fcfcda",
-              borderRadius: "10px",
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Checkbox
-              sx={{
-                color: "#8E7DBE",
-                "&.Mui-checked": {
-                  color: "#99C1B9",
-                },
-              }}
-            />
+          {filteredTasks.length === 0 ? (
             <Typography
               sx={{
-                flex: 1,
-                fontSize: "16px",
-                fontWeight: "bold",
-                color: "#8E7DBE",
-                marginLeft: "10px",
+                fontSize: "18px",
+                color: "#F1E3D3",
+                fontStyle: "italic",
+                fontFamily: "Indie Flower",
+                textAlign: "center",
+                width: "100%",
               }}
             >
-              Tareita
+              No hay tareas pendientes aún
             </Typography>
-            <Edit />
-            <Delete />
-          </Box>
+          ) : (
+            filteredTasks.map((task) => (
+              <Box
+                key={task.id}
+                sx={{
+                  width: "100%",
+                  backgroundColor: "#fcfcda",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Checkbox
+                  checked={task.completed}
+                  onChange={() => toggleComplete(task.id)}
+                  sx={{
+                    color: "#8E7DBE",
+                    "&.Mui-checked": {
+                      color: "#99C1B9",
+                    },
+                  }}
+                />
+                <Typography
+                  sx={{
+                    flex: 1,
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    color: task.completed ? "#D8D8D8" : "#8E7DBE",
+                    textDecoration: task.completed ? "line-through" : "none",
+                    opacity: task.completed ? 0.6 : 1,
+                    marginLeft: "10px",
+                  }}
+                >
+                  {task.text}
+                </Typography>
+                <Edit />
+                <Delete />
+              </Box>
+            ))
+          )}
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default Tasklist;
+export default TaskList;

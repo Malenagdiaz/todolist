@@ -20,7 +20,7 @@ const Header = ({ theme, setTheme }) => {
       <Typography
         variant="h1"
         sx={{
-          fontSize: { xs: 20, md: 45 },
+          fontSize: { xs: 30, md: 45 },
           color: "#F1E3D3",
           fontFamily: "Margarine",
           display: "flex",

@@ -1,9 +1,35 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { saveTasks, loadTasks } from "../utils/localStorage";
 import { Box, TextField, IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Filter from "../components/Filter";
 
-const NewTask = () => {
+const NewTask = ({ setTasks, setFilter }) => {
+  const [newTaskText, setNewTaskText] = useState("");
+  const [filter, handleFilter] = useState("Todas");
+
+  const handleFilterChange = (newFilter) => {
+    handleFilter(newFilter);
+    setFilter(newFilter);
+  };
+
+  const handleAddTask = () => {
+    if (newTaskText.trim()) {
+      const newTask = {
+        id: uuidv4(),
+        text: newTaskText,
+        completed: false,
+      };
+      const tasks = loadTasks();
+      tasks.push(newTask);
+      saveTasks(tasks);
+      setNewTaskText("");
+      setTasks(tasks);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -38,6 +64,8 @@ const NewTask = () => {
           <TextField
             variant="outlined"
             placeholder="Añada su tarea"
+            value={newTaskText}
+            onChange={(e) => setNewTaskText(e.target.value)}
             sx={{
               flex: 1,
               fontFamily: "Indie Flower",
@@ -61,6 +89,7 @@ const NewTask = () => {
             }}
           />
           <IconButton
+            onClick={handleAddTask}
             sx={{
               padding: "6px 8px",
               backgroundColor: "#99C1B9",
@@ -71,7 +100,7 @@ const NewTask = () => {
           >
             <FontAwesomeIcon icon={faPlus} style={{ color: "#ffffff" }} />
           </IconButton>
-          <Filter />
+          <Filter filter={filter} handleFilter={handleFilterChange} />
         </Box>
       </Box>
     </Box>

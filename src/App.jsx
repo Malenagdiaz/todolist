@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { loadTasks, saveTasks } from "../src/utils/localStorage";
 import { ThemeProvider, Box } from "@mui/material";
 import { lightTheme, darkTheme } from "../src/theme/theme";
-import Header from "./components/Header";
-import NewTask from "./components/NewTask";
-import Tasklist from "./components/Tasklist";
+import Header from "../src/components/Header";
+import NewTask from "../src/components/NewTask";
+import TaskList from "../src/components/Tasklist";
 
 function App() {
   const [theme, setTheme] = useState("light");
+  const [filter, setFilter] = useState("Todas");
+  const [tasks, setTasks] = useState(loadTasks());
+
+  const toggleComplete = (id) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
+  };
+
+  useEffect(() => {
+    saveTasks(tasks);
+  }, [tasks]);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -21,8 +36,13 @@ function App() {
         }}
       >
         <Header theme={theme} setTheme={setTheme} />
-        <NewTask />
-        <Tasklist />
+        <NewTask setTasks={setTasks} setFilter={setFilter} />
+        <TaskList
+          tasks={tasks}
+          toggleComplete={toggleComplete}
+          filter={filter}
+          setTasks={setTasks}
+        />
       </Box>
     </ThemeProvider>
   );
