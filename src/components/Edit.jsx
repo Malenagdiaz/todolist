@@ -58,6 +58,9 @@ const Edit = ({ taskId, onEdit }) => {
             "& .MuiInputLabel-root": {
               color: "#382961",
             },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "#382961",
+            },
             "& .MuiInputBase-input": {
               color: "#382961",
             },
