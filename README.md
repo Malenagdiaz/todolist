@@ -2,13 +2,13 @@
 
 Te presento **⋆⭒˚.⋆☂LLUVIA DE TAREAS☂⋆⭒˚.⋆**, una aplicación diseñada para ayudarte a organizar y gestionar tus tareas diarias de manera eficiente, mientras añades un toque de creatividad y estilo a tu rutina. Esta lista de tareas no es solo una herramienta funcional, sino también una expresión de personalidad y organización.
 
-## Estructura de la Web 💻
+## Estructura de la Web :computer:
 
 ![Inicio](src/assets/iniciopag.png)
 
 En la **página de inicio** de mi web, encontrarás un **header** que destaca con el título **⋆⭒˚.⋆☂LLUVIA DE TAREAS☂⋆⭒˚.⋆**. Además, cuenta con un práctico cambiador de tema que te permite alternar entre el modo claro y oscuro, adaptándose a tus preferencias de visualización.
 
-## Funcionalidad ✨
+## Funcionalidad :sparkles:
 
 ![Tareas](src/assets/tareasnuevas.png)
 
@@ -46,10 +46,12 @@ Si necesitas modificar una tarea, puedes hacerlo fácilmente haciendo clic en el
 
 El botón de la luna te permite cambiar el tema de la aplicación, ofreciéndote una mejor visibilidad según tus necesidades, ya sea en un entorno claro o oscuro.
 
-### Tecnologías Utilizadas 💻
+### Tecnologías Utilizadas :computer:
 
 Este proyecto está construido utilizando **React** y **Material UI**, lo que asegura una experiencia de usuario moderna y una interfaz intuitiva.
 
-### Créditos 🏅
+### Créditos :medal:
 
-Desarrollado con mucho 🤍 por **Male**.
+Desarrollado con mucho :white_heart: por **Male**.
+
+Puedes ver la aplicación aquí: [₊˚⊹♡Lluvia de Tareas₊˚⊹♡](https://lluviadetareas.netlify.app/)
